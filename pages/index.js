@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Metrics } from "../components/Metrics";
 
 export default function Home({ cruxData }) {
   return (
@@ -6,7 +7,9 @@ export default function Home({ cruxData }) {
       <Head>
         <title>Calibre | Core Web Vitals Checker</title>
       </Head>
-      <main>CWV</main>
+      <main>
+        <Metrics />
+      </main>
     </div>
   );
 }
