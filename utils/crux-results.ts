@@ -26,7 +26,7 @@ export const getCruxResults = (cruxReport: CruxReport): CruxResults => {
   const { metrics } = cruxReport.record;
   return Object.values(MetricNames).reduce((prev, current) => {
     const score = getScore(metrics[current].percentiles.p75, units[current]);
-    const status = getStatusLabels(score, thresholds[current]);
+    const status = getStatusLabels(Number(score), thresholds[current]);
     return {
       ...prev,
       [current]: {
@@ -37,8 +37,8 @@ export const getCruxResults = (cruxReport: CruxReport): CruxResults => {
   }, {});
 };
 
-const getScore = (p75: number | string, units: UnitNames): number => {
-  return units === UnitNames.SECONDS ? millToSECONDS(Number(p75)) : Number(p75);
+const getScore = (p75: number | string, units: UnitNames): number | string => {
+  return units === UnitNames.SECONDS ? (Number(p75) / 1000).toFixed(2) : p75;
 };
 
 const getStatusLabels = (
@@ -48,8 +48,4 @@ const getStatusLabels = (
   if (score > threshold[0]) return StatusLabels.POOR;
   if (score <= threshold[1]) return StatusLabels.GOOD;
   return StatusLabels.IMPROVE;
-};
-
-const millToSECONDS = (num: number): number => {
-  return +(Math.round(Number(num / 1000 + "e+2")) + "e-2");
 };
