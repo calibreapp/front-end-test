@@ -9,7 +9,7 @@ interface Props {
 export const Metrics = ({ cruxResults }: Props) => {
   return (
     <div>
-      <h2>Metric report</h2>
+      <h3>Metric report</h3>
       <div>
         {metricCards.map((card) => (
           <div key={card.type}>
@@ -17,7 +17,7 @@ export const Metrics = ({ cruxResults }: Props) => {
               <div>{`${cruxResults[card.type].score}${units[card.type]}`}</div>
               <div>{cruxResults[card.type].status}</div>
             </div>
-            <h3>{card.title}</h3>
+            <h4>{card.title}</h4>
             <p>{card.description}</p>
           </div>
         ))}

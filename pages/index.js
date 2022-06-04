@@ -1,4 +1,6 @@
 import Head from "next/head";
+import { Header } from "../components/Header";
+import { Intro } from "../components/Intro";
 import { getCruxResults } from "../utils/crux-results";
 import { Metrics } from "../components/Metrics";
 
@@ -7,8 +9,14 @@ export default function Home({ cruxResults }) {
     <div>
       <Head>
         <title>Calibre | Core Web Vitals Checker</title>
+        <meta
+          name="description"
+          content="Site speed report for https://google.com"
+        />
       </Head>
+      <Header />
       <main>
+        <Intro />
         <Metrics cruxResults={cruxResults} />
       </main>
     </div>
