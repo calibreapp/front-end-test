@@ -1,9 +1,3 @@
-export enum Units {
-  Seconds = "s",
-  Milliseconds = "ms",
-  Unitless = "",
-}
-
 export enum MetricNames {
   CLS = "cumulative_layout_shift",
   FCP = "first_contentful_paint",
@@ -11,10 +5,47 @@ export enum MetricNames {
   LCP = "largest_contentful_paint",
 }
 
+export enum UnitNames {
+  SECONDS = "s",
+  MILLISECONDS = "ms",
+  UNITLESS = "",
+}
+
+export enum StatusLabels {
+  POOR = "poor",
+  IMPROVE = "improve",
+  GOOD = "good",
+}
+
 export interface MetricCard {
   type: MetricNames;
   title: string;
   description: string;
-  units: Units;
-  threshold: [poor: number, good: number];
+}
+
+export type Thresholds = {
+  [key in MetricNames]: [poor: number, good: number];
+};
+
+export type Units = {
+  [key in MetricNames]: UnitNames;
+};
+
+export interface CruxResults {
+  [key: string]: {
+    score: number;
+    status: StatusLabels;
+  };
+}
+
+export interface CruxReport {
+  record: {
+    metrics: {
+      [key in MetricNames]: {
+        percentiles: {
+          p75: number;
+        };
+      };
+    };
+  };
 }

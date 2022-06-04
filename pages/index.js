@@ -1,14 +1,15 @@
 import Head from "next/head";
+import { getCruxResults } from "../utils/crux-results";
 import { Metrics } from "../components/Metrics";
 
-export default function Home({ cruxData }) {
+export default function Home({ cruxResults }) {
   return (
     <div>
       <Head>
         <title>Calibre | Core Web Vitals Checker</title>
       </Head>
       <main>
-        <Metrics />
+        <Metrics cruxResults={cruxResults} />
       </main>
     </div>
   );
@@ -23,10 +24,11 @@ export async function getStaticProps() {
     }
   );
   const cruxData = await response.json();
+  const cruxResults = getCruxResults(cruxData);
 
   return {
     props: {
-      cruxData,
+      cruxResults,
     },
     revalidate: 60,
   };
