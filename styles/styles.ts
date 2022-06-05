@@ -152,7 +152,7 @@ export const status = (status: StatusLabels) => css`
     ? "color: var(--yellow-500);"
     : "color: var(--white);"}
   ${status === StatusLabels.GOOD && "background: var(--green-300);"}
-  ${status === StatusLabels.IMPROVE && "background: var(--orange);"}
+  ${status === StatusLabels.IMPROVE && "background: var(--yellow-300);"}
   ${status === StatusLabels.POOR && "background: var(--red-300);"}
 `;
 
